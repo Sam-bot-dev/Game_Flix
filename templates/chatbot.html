@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CyberGuard AI Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">CyberGuard</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#how-it-works">How It Works</a></li>
+      <li><a href="/#dashboard">Dashboard</a></li>
+      <li><a href="/#code-scanner">CODE</a></li>
+      <li><a href="/#extension">Try Extension</a></li>
+    </ul>
+    <a href="#" class="btn-primary">Get Started</a>
+  </nav>
+
+  <section class="chatbot-section">
+    <div class="chat-container">
+      <div class="chat-title">CyberGuard AI ASSISTANT
+      </div>
+
+      <div id="chatWindow" class="chat-window">
+        <div id="chatWindow" class="chat-window">
+        <!-- Welcome message will appear here -->
+        </div>
+
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
