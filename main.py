@@ -3,13 +3,16 @@ import time
 import requests
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+import os
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)
 
 # ---- TWITCH / IGDB CREDENTIALS (you provided these) ----
-CLIENT_ID = "aekin04nz4qs94z3qu96q69q7pxzoq"
-CLIENT_SECRET = "jpc43hdv4r29dhngg1yfybjiz3q6sv"
+
+CLIENT_ID = os.environ.get("TWITCH_CLIENT_ID")
+CLIENT_SECRET = os.environ.get("TWITCH_CLIENT_SECRET")
+
 
 # ---- token cache ----
 _TOKEN = None
