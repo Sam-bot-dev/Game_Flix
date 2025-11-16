@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Game Details - GameFlix</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+  <style type="text/tailwindcss">
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+
+<body class="bg-black font-display text-white">
+<div class="min-h-screen w-full flex flex-col">
+
+  <!-- HEADER -->
+  <header class="flex h-16 items-center justify-between bg-black/70 px-6 fixed top-0 left-0 right-0 z-50 backdrop-blur">
+    <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='home.html'">
+      <svg class="size-6 text-primary" viewBox="0 0 48 48" fill="none">
+        <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"/>
+      </svg>
+      <h1 class="text-2xl font-black tracking-tighter">GameFlix</h1>
+    </div>
+
+    <button onclick="window.location.href='SEARCH.html'" 
+      class="flex h-10 w-10 rounded-full items-center justify-center text-gray-300 hover:bg-white/10 active:scale-95">
+      <span class="material-symbols-outlined">search</span>
+    </button>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-20 pb-20 px-4 md:px-10 max-w-7xl mx-auto w-full">
+
+    <!-- HERO IMAGE -->
+    <div id="cover-container" class="w-full h-[350px] md:h-[450px] rounded-lg bg-cover bg-center shadow-xl"></div>
+
+    <!-- TITLE + META -->
+    <div class="mt-6 flex flex-col gap-4">
+      <h2 id="game-title" class="text-4xl md:text-5xl font-black"></h2>
+      <p id="genres" class="text-gray-300 text-sm"></p>
+      <p id="platforms" class="text-gray-300 text-sm"></p>
+      <p id="release-date" class="text-gray-400 text-sm"></p>
+
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-yellow-400 text-3xl">star</span>
+        <p id="rating" class="text-lg font-semibold"></p>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="mt-6">
+      <h3 class="text-2xl font-bold mb-2">Summary</h3>
+      <p id="summary" class="text-gray-300 leading-relaxed"></p>
+    </div>
+
+    <!-- STORYLINE -->
+    <div class="mt-6 hidden" id="story-section">
+      <h3 class="text-2xl font-bold mb-2">Storyline</h3>
+      <p id="storyline" class="text-gray-300 leading-relaxed"></p>
+    </div>
+
+    <!-- SCREENSHOTS -->
+    <div class="mt-10">
+      <h3 class="text-2xl font-bold mb-3">Screenshots</h3>
+      <div id="screenshots-row" class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide"></div>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="mt-10">
+      <h3 class="text-2xl font-bold mb-3">Trailers</h3>
+      <div id="videos-row" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </div>
+
+    <!-- SIMILAR GAMES -->
+    <div class="mt-14">
+      <h3 class="text-2xl font-bold mb-3">Similar Games</h3>
+      <div id="similar-row" class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- SCRIPT -->
+<script>
+async function loadGameDetails() {
+  const params = new URLSearchParams(window.location.search);
+  const gameName = params.get("name");
+
+  if (!gameName) {
+    alert("No game name provided.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/game-by-name?name=${encodeURIComponent(gameName)}`);
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Error: ${res.status} - ${text}`);
+    }
+
+    const game = await res.json();
+
+    // Cover
+    if (game.cover?.image_id) {
+      document.getElementById("cover-container").style.backgroundImage =
+        `url(https://images.igdb.com/igdb/image/upload/t_1080p/${game.cover.image_id}.jpg)`;
+    }
+
+    // Title
+    document.getElementById("game-title").textContent = game.name;
+
+    // Genres
+    document.getElementById("genres").textContent =
+      game.genres?.map(g => g.name).join(", ") || "Unknown";
+
+    // Platforms
+    document.getElementById("platforms").textContent =
+      "Available on: " + (game.platforms?.map(p => p.name).join(", ") || "N/A");
+
+    // Rating
+    document.getElementById("rating").textContent =
+      game.total_rating ? game.total_rating.toFixed(1) + "/100" : "N/A";
+
+    // Release date
+    if (game.first_release_date) {
+      const dt = new Date(game.first_release_date * 1000);
+      document.getElementById("release-date").textContent =
+        "Released: " + dt.toLocaleDateString();
+    }
+
+    // Summary
+    document.getElementById("summary").textContent =
+      game.summary || "No summary available.";
+
+    // Screenshots
+    const ssRow = document.getElementById("screenshots-row");
+    ssRow.innerHTML = "";
+    (game.screenshots || []).forEach(sc => {
+      ssRow.innerHTML += `
+        <img src="https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${sc.image_id}.jpg"
+          class="h-40 rounded-lg cursor-pointer hover:opacity-80" />
+      `;
+    });
+
+    // Videos
+    const videoRow = document.getElementById("videos-row");
+    videoRow.innerHTML = "";
+    (game.videos || []).forEach(v => {
+      videoRow.innerHTML += `
+        <iframe class="w-full h-64 rounded-lg"
+          src="https://www.youtube.com/embed/${v.video_id}" allowfullscreen></iframe>
+      `;
+    });
+
+    // Similar games
+    const simRow = document.getElementById("similar-row");
+    simRow.innerHTML = "";
+    (game.similar_games || []).forEach(sim => {
+      if (!sim.cover) return;
+      simRow.innerHTML += `
+        <div class="min-w-[180px] cursor-pointer" onclick="openGame('${sim.name}')">
+          <img class="h-48 w-full rounded-lg object-cover"
+            src="https://images.igdb.com/igdb/image/upload/t_cover_big/${sim.cover.image_id}.jpg" />
+          <p class="mt-2 text-sm font-semibold">${sim.name}</p>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    alert("Error loading game details: " + err.message);
+    console.error(err);
+  }
+}
+
+function openGame(name) {
+  window.location.href = `G_DETAILS.html?name=${encodeURIComponent(name)}`;
+}
+
+loadGameDetails();
+</script>
+
+
+
+
+
+</body>
+</html>

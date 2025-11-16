@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GameFlix - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#E50914",
+                "secondary": "#007BFF",
+                "tertiary": "#FFD700",
+                "background-light": "#111111",
+                "background-dark": "#000000",
+            },
+            fontFamily: { "display": ["Be Vietnam Pro", "sans-serif"] },
+            borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+    },
+}
+</script>
+<style>
+.game-card img { transition: transform .3s ease; }
+.game-card:hover img { transform: scale(1.06); }
+
+.loader {
+    display:inline-block;
+    width:36px;height:36px;border:4px solid rgba(255,255,255,0.15);
+    border-top-color: rgba(255,255,255,0.7); border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#resultsTitle { word-break: break-word; }
+</style>
+</head>
+<body class="bg-background-dark font-display text-[#E0E0E0]">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap bg-background-dark/80 px-4 py-4 backdrop-blur-sm sm:px-6 md:px-10 lg:px-20">
+<div class="flex items-center gap-4">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path></svg>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em] text-white">GameFlix</h2>
+</div>
+<div class="hidden flex-1 items-center justify-end gap-8 md:flex">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium leading-normal text-white hover:text-primary" href="/">Home</a>
+<a class="text-sm font-medium leading-normal text-primary" href="/SEARCH.html">Browse</a>
+</nav>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDiYRXn7RPSSDpkNE_sF5MBferTWoUBX1tTW-RetVsjpEDbhaEAl_LDWY5K4tV75EQndwSdNcXW_fyhfgvMjEyWeZ0XYVoYH5307bSw90njPEvyJdsOlYLx6mBrZkW9Qbn-JCXVnB-Vo-UsSdqlBSxUK35VuEn-eAA9NKlWB-uVGnGFT1THiKC9uFlZPN-j4uI4puRoDZD9H0lIi13m1INwhpqFFsFt0ar3X_N1t6CQ2wUpodKqU7lyoncv5UZx9NGoiXmV3fa6za4");'></div>
+</div>
+</header>
+
+<main class="flex flex-1 justify-center py-5">
+<div class="flex w-full max-w-6xl flex-col px-4 sm:px-6">
+
+<!-- Search Section -->
+<section class="flex flex-col items-center gap-6 pt-12 pb-10 sm:pt-16 sm:pb-12" id="searchSection">
+<h1 class="font-display text-3xl font-bold leading-tight tracking-tighter text-white sm:text-4xl md:text-5xl">Find Your Next Adventure</h1>
+<div class="w-full max-w-2xl">
+<label class="flex flex-col h-14 w-full">
+<div id="searchBox" class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#1A1A1A] ring-1 ring-transparent focus-within:ring-secondary transition-all duration-200">
+<div class="text-[#A0A0A0] flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<input id="searchInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-white placeholder:text-[#A0A0A0] focus:outline-0 focus:ring-0 border-none bg-transparent px-4 py-2 text-base font-normal leading-normal"
+ placeholder="Search for games, genres, platforms..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#222222] px-4 hover:bg-primary transition-colors">Genre
+<span class="material-symbols-outlined text-xl text-white">arrow_drop_down</span></button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#222222] px-4 hover:bg-primary transition-colors">Platform
+<span class="material-symbols-outlined text-xl text-white">arrow_drop_down</span></button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#222222] px-4 hover:bg-primary transition-colors">Release Year
+<span class="material-symbols-outlined text-xl text-white">arrow_drop_down</span></button>
+</div>
+</section>
+
+<!-- Trending -->
+<section class="py-6" id="trendingSection">
+<h3 class="text-xl font-bold leading-tight tracking-[-0.015em] text-white px-4 pb-4">Trending Searches</h3>
+<div class="flex flex-wrap gap-3 p-3">
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-[#222222] px-4 hover:bg-secondary/80 transition-colors" data-q="Cyberpunk 2077">Cyberpunk 2077</button>
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-[#222222] px-4 hover:bg-secondary/80 transition-colors" data-q="Elden Ring">Elden Ring</button>
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-[#222222] px-4 hover:bg-secondary/80 transition-colors" data-q="Stardew Valley">Stardew Valley</button>
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-[#222222] px-4 hover:bg-secondary/80 transition-colors" data-q="Open World RPG">Open World RPG</button>
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-[#222222] px-4 hover:bg-secondary/80 transition-colors" data-q="Indie Horror">Indie Horror</button>
+</div>
+</section>
+
+<!-- Results Section -->
+<section class="py-6" id="resultsSection">
+<h3 id="resultsTitle" class="text-xl font-bold leading-tight tracking-[-0.015em] text-white px-4 pb-4">Start typing to search</h3>
+<div id="resultsGrid" class="flex flex-wrap gap-4 px-3"></div>
+<div id="statusMsg" class="mt-6 text-center text-gray-400"></div>
+</section>
+
+</div>
+</main>
+</div>
+</div>
+
+<script>
+const input = document.getElementById("searchInput");
+const grid = document.getElementById("resultsGrid");
+const resultsTitle = document.getElementById("resultsTitle");
+const statusMsg = document.getElementById("statusMsg");
+
+// Escape HTML safely
+function escapeHtml(s) {
+    if (!s) return "";
+    return String(s).replace(/[&<>"'`=\/]/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","/":"&#x2F;"
+    }[c]));
+}
+
+// Build game card HTML like home.js
+function buildCardHTML(game) {
+    const genres = (game.genres || []).join(", ") || "";
+    const cover = game.cover || "/static/placeholder-game.png";
+    const title = escapeHtml(game.title || game.name || "Untitled");
+
+    return `
+    <div class="group relative aspect-[3/4] w-52 shrink-0 snap-start overflow-hidden rounded-lg 
+        transition-transform duration-300 ease-in-out hover:scale-105 hover:z-10 cursor-pointer" 
+        data-name="${encodeURIComponent(title)}">
+        
+        <img class="h-full w-full object-cover" src="${cover}" alt="${title}" 
+             onerror="this.src='/static/placeholder-game.png'"/>
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-3">
+            <h4 class="font-bold text-white truncate">${title}</h4>
+            <p class="text-xs text-gray-300 truncate">${genres}</p>
+        </div>
+    </div>
+    `;
+}
+
+// Attach click events to navigate to G_DETAILS.html
+function attachCardClicks() {
+    grid.querySelectorAll("[data-name]").forEach(card => {
+        card.addEventListener("click", () => {
+            const name = card.getAttribute("data-name");
+            if (name) {
+                window.location.href = `G_DETAILS.html?name=${decodeURIComponent(name)}`;
+            }
+        });
+    });
+}
+
+// Perform search
+async function performSearch(q) {
+    resultsTitle.innerText = `Searching for "${q}"...`;
+    statusMsg.innerHTML = `<div class="loader" style="margin:auto"></div>`;
+
+    try {
+        const res = await fetch(`/api/search_game?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        const games = data.results || [];
+
+        if (!games.length) {
+            resultsTitle.innerText = `No results for "${q}"`;
+            grid.innerHTML = "";
+            statusMsg.innerText = "Try a different game name.";
+            return;
+        }
+
+        resultsTitle.innerText = `Results for "${q}"`;
+        grid.innerHTML = games.map(buildCardHTML).join("");
+        statusMsg.innerText = "";
+        attachCardClicks();
+    } catch (err) {
+        console.error(err);
+        resultsTitle.innerText = `Error searching for "${q}"`;
+        statusMsg.innerText = "There was a problem. Try again.";
+    }
+}
+
+// Debounce input
+let debounceTimer = null;
+input.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    const q = input.value.trim();
+    if (!q || q.length < 2) {
+        resultsTitle.innerText = "Start typing to search";
+        grid.innerHTML = "";
+        statusMsg.innerHTML = "";
+        return;
+    }
+    debounceTimer = setTimeout(() => performSearch(q), 400);
+});
+
+input.addEventListener("keypress", e => {
+    if (e.key === "Enter") performSearch(input.value.trim());
+});
+
+// Trending buttons click
+document.querySelectorAll("[data-q]").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const q = btn.getAttribute("data-q");
+        input.value = q;
+        performSearch(q);
+    });
+});
+</script>
+
+</body>
+</html>
