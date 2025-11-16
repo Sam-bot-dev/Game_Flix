@@ -17,9 +17,9 @@ GameFlix is a Flask-based web application that allows users to **search, browse,
 
 ## Screenshots
 
-![Home Page](https://yourdomain.com/static/screenshots/homepage.png)  
-![Search Results](https://yourdomain.com/static/screenshots/search.png)  
-![Game Details](https://yourdomain.com/static/screenshots/game_details.png)  
+![Home Page](static/screenshots/homepage.png)  
+![Search Results](static/screenshots/search.png)  
+![Game Details](static/screenshots/game_details.png)
 
 > Make sure to replace the image URLs with your hosted images from your website.
 
