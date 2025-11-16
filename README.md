@@ -42,35 +42,31 @@ GameFlix is a Flask-based web application that allows users to **search, browse,
 git clone https://github.com/yourusername/gameflix.git
 cd gameflix
 ```
-## Create a virtual environment:
+2. **Create a virtual environment:**
+```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
-
-## Install dependencies:
+```
+3. **Install dependencies:**
+```bash
 pip install -r requirements.txt
-
+```
 ## Set Twitch/IGDB credentials:
 - Edit main.py (or app.py) and replace the placeholders with your Twitch Client ID and Client Secret.
 CLIENT_ID = "YOUR_TWITCH_CLIENT_ID"
 CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
 
 ##Run the app locally:
+```bash
 python main.py
-
+```
 ##Deployment on Render
 - Build Command:
+  ```bash
   pip install -r requirements.txt
+  ```
 - Start Command:
+  ```bash
   gunicorn main:app
-  
-#License
-
-MIT License - Open source for personal and educational use.
-##Notes
-
-Make sure your Twitch/IGDB keys are valid.
-
-Ensure all static files (images, JS, CSS) exist in the static folder to avoid 404 errors.
-
-For production, use gunicorn as the server.
+  ```
