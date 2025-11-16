@@ -1,4 +1,4 @@
 Flask==2.3.3
 requests==2.32.0
-flask-cors==3.1.1
+flask-cors==3.0.10
 gunicorn==21.2.0
