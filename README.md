@@ -1,4 +1,4 @@
-# GameFlix - Game Search & Recommendation Web App
+# 🏆GameFlix - Game Search & Recommendation Web App
 
 GameFlix is a Flask-based web application that allows users to **search, browse, and discover video games** with detailed information including **cover images, genres, release dates, ratings, and summaries**. The app integrates with **IGDB (Internet Game Database)** via the Twitch API.
 
@@ -15,7 +15,7 @@ GameFlix is a Flask-based web application that allows users to **search, browse,
 
 ---
 
-## Screenshots
+## Screenshots ⚔️
 
 ![Home Page](static/screenshots/homepage.png)  
 ![Search Results](static/screenshots/search.png)  
@@ -51,7 +51,7 @@ venv\Scripts\activate     # Windows
 ```bash
 pip install -r requirements.txt
 ```
-## Set Twitch/IGDB credentials:
+## Set Twitch/IGDB credentials: 💾
 - Edit main.py (or app.py) and replace the placeholders with your Twitch Client ID and Client Secret.
 CLIENT_ID = "YOUR_TWITCH_CLIENT_ID"
 CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
