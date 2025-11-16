@@ -88,38 +88,37 @@
         <p class="mt-4 text-gray-300">Embark on a neon-drenched epic journey.</p>
 
         <div class="mt-8 flex gap-4">
-          <button onclick="window.location.href='G_DETAILS.html'"
+          <button onclick="openTrailer()"
             class="h-12 min-w-40 rounded bg-primary px-6 font-bold flex items-center gap-2 hover:scale-105">
             <span class="material-symbols-outlined">play_arrow</span> Play Trailer
-          </button>
-          <button class="h-12 min-w-40 rounded bg-white/10 px-6 font-bold hover:bg-white/20 hover:scale-105">
-            Add to Wishlist
-          </button>
-          <button class="h-12 w-12 rounded-full border border-white/20 bg-transparent hover:bg-white/10 hover:scale-105">
-            <span class="material-symbols-outlined">more_horiz</span>
           </button>
         </div>
       </div>
     </section>
 
+    <!-- TRAILER MODAL -->
+    <div id="trailerModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80">
+      <div class="relative w-11/12 max-w-3xl">
+        <button onclick="closeTrailer()"
+          class="absolute top-2 right-2 text-white text-2xl font-bold z-50">×</button>
+        <iframe id="trailerVideo" width="100%" height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" title="Trailer" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+
     <!-- CAROUSELS -->
     <section class="space-y-12 py-12">
-
       <div>
         <h3 class="text-2xl font-bold px-6 lg:px-10">Trending Games</h3>
         <div id="trending-row" class="flex gap-4 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"></div>
       </div>
-
       <div>
         <h3 class="text-2xl font-bold px-6 lg:px-10">New Releases</h3>
         <div id="new-row" class="flex gap-4 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"></div>
       </div>
-
       <div>
         <h3 class="text-2xl font-bold px-6 lg:px-10">Recommended For You</h3>
         <div id="recommended-row" class="flex gap-4 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"></div>
       </div>
-
     </section>
 
     <!-- FOOTER -->
@@ -129,6 +128,22 @@
 
   </main>
 </div>
+
+<script>
+  function openTrailer() {
+    const modal = document.getElementById('trailerModal');
+    modal.classList.remove('hidden');
+    const iframe = document.getElementById('trailerVideo');
+    iframe.src += "&autoplay=1";
+  }
+
+  function closeTrailer() {
+    const modal = document.getElementById('trailerModal');
+    modal.classList.add('hidden');
+    const iframe = document.getElementById('trailerVideo');
+    iframe.src = iframe.src.replace("&autoplay=1", "");
+  }
+</script>
 
 <!-- HOME LOGIC -->
 <script src="/static/js/home.js"></script>
