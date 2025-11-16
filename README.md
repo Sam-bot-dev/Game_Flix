@@ -51,7 +51,7 @@ venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 
 ## Set Twitch/IGDB credentials:
-- **Edit main.py (or app.py) and replace the placeholders with your Twitch Client ID and Client Secret.
+- Edit main.py (or app.py) and replace the placeholders with your Twitch Client ID and Client Secret.
 CLIENT_ID = "YOUR_TWITCH_CLIENT_ID"
 CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
 
@@ -59,11 +59,12 @@ CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
 python main.py
 
 ##Deployment on Render
-- **Build Command:
+- Build Command:
   pip install -r requirements.txt
-- **Start Command:
+- Start Command:
   gunicorn main:app
-##License
+  
+#License
 
 MIT License - Open source for personal and educational use.
 ##Notes
