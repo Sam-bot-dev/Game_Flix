@@ -1,7 +1,7 @@
 # 🏆GameFlix - Game Search & Recommendation Web App
 
 GameFlix is a Flask-based web application that allows users to **search, browse, and discover video games** with detailed information including **cover images, genres, release dates, ratings, and summaries**. The app integrates with **IGDB (Internet Game Database)** via the Twitch API.
-
+Try it out! :- https://game-flix.onrender.com/ 
 ---
 
 ## Features
